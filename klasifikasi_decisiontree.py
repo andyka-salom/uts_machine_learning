@@ -9,8 +9,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from tabulate import tabulate
 
-fileLocation = '../mlprak_uts/dataset_sudahnormalisasi.csv'
-df = pd.read_csv(fileLocation)
+# fileLocation = '../mlprak_uts/dataset_sudahnormalisasi.csv'
+df =pd.read_csv('dataset_sudahnormalisasi.csv')
 df.columns = ['GENDER','AGE', 'SMOKING', 'YELLOW_FINGERS', 'ANXIETY', 'PEER_PRESSURE', 
               'CHRONIC_DISEASE', 'FATIGUE', 'ALLERGY', 'WHEEZING', 
               'ALCOHOL_CONSUMING', 'COUGHING', 'SHORTNESS_OF_BREATH', 

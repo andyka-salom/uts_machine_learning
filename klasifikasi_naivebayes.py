@@ -15,7 +15,7 @@ matplotlib.use('TkAgg')
 pd.options.mode.chained_assignment = None
 
 # Membaca data
-dataframe = pd.read_csv('d:/Ratna/Kuliah/Semester 5/Pembelajaran Mesin/Praktikum/Python_Mesin/TM5_NaiveBayes/dataset_sudahnormalisasi.csv')
+dataframe = pd.read_csv('dataset_sudahnormalisasi.csv')
 
 # Seleksi kolom yang akan digunakan
 data = dataframe[['GENDER', 'AGE', 'SMOKING', 'YELLOW_FINGERS', 'ANXIETY', 'PEER_PRESSURE', 'CHRONIC_DISEASE', 'FATIGUE', 'ALLERGY', 'WHEEZING', 'ALCOHOL_CONSUMING', 'COUGHING', 'SHORTNESS_OF_BREATH', 'SWALLOWING_DIFFICULTY', 'CHEST_PAIN', 'LUNG_CANCER']]
