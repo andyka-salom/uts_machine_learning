@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="text-center">
+    <h1 class="display-4">Lung Cancer Prediction using Random Forest</h1>
+    <p class="lead">This Flask application allows you to classify lung cancer using a machine learning model trained with Random Forest.</p>
+    
+    <div class="mt-4">
+        <h2>What is Lung Cancer Classification?</h2>
+        <p>
+            Lung cancer classification refers to the process of identifying whether a patient is at risk of developing lung cancer based on various health-related factors such as smoking habits, fatigue, chest pain, and more. In this application, we use a set of clinical data to predict whether a person has a high likelihood of having lung cancer.
+        </p>
+
+        <!-- Penjelasan tentang Random Forest -->
+        <h2>Method Used: Random Forest</h2>
+        <p>
+            The Random Forest method is a robust machine learning algorithm that is commonly used for classification tasks. It works by creating an ensemble of decision trees from randomly selected subsets of the data, and then combining their results to improve the accuracy of predictions. Random Forest is highly effective in reducing overfitting and improving generalization to new, unseen data.
+        </p>
+        <p>
+            In this application, Random Forest has been trained on a dataset of health indicators commonly associated with lung cancer, and it can help predict whether a person is likely to develop lung cancer based on their symptoms and medical history.
+        </p>
+    </div>
+
+    <a href="{{ url_for('classify_page') }}" class="btn btn-primary btn-lg mt-4">Go to Classification</a>
+</div>
+{% endblock %}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}Health - Lung Cancer Prediction{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tooplate-style.css') }}">
+    <style>
+        .text-center {
+            padding: 60px 0;
+        }
+        footer {
+            padding: 20px;
+            background: #333;
+            color: white;
+        }
+        footer a {
+            color: inherit;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
+
+<!-- Navbar -->
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="{{ url_for('landing_page') }}" class="navbar-brand">
+                <i class="fa fa-h-square"></i> Lung Cancer Diagnosis
+            </a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{ url_for('landing_page') }}">Home</a></li>
+                <li><a href="{{ url_for('classify_page') }}">Classification</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Content -->
+<div class="container text-center">
+    {% block content %}{% endblock %}
+</div>
+
+<!-- Footer -->
+<footer class="text-center">
+    <p>&copy; 2024 Lung Cancer Diagnosis. All Rights Reserved.</p>
+</footer>
+
+<!-- JS -->
+<script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+</body>
+</html>
