@@ -16,7 +16,7 @@ app = Flask(__name__)
 
 # Load and prepare the model once when the application starts
 def load_model():
-    # Load dataset
+    # Load dataset 
     dataframe = pd.read_csv('dataset_sudahnormalisasi.csv')
 
     # Prepare features and labels
@@ -59,16 +59,18 @@ def classify(input_data):
     except FileNotFoundError:
         return "Dataset tidak ditemukan", None
 
+    # Prepare features and labels
     data = dataframe[['GENDER', 'AGE', 'SMOKING', 'YELLOW_FINGERS', 'ANXIETY', 'PEER_PRESSURE', 
-                      'CHRONIC_DISEASE', 'FATIGUE', 'ALLERGY', 'WHEEZING', 'ALCOHOL_CONSUMING', 
-                      'COUGHING', 'SHORTNESS_OF_BREATH', 'SWALLOWING_DIFFICULTY', 'CHEST_PAIN', 'LUNG_CANCER']]
+                      'CHRONIC_DISEASE', 'FATIGUE', 'ALLERGY', 'WHEEZING', 
+                      'ALCOHOL_CONSUMING', 'COUGHING', 'SHORTNESS_OF_BREATH', 
+                      'SWALLOWING_DIFFICULTY', 'CHEST_PAIN', 'LUNG_CANCER']]
 
     # Label encoding for categorical features
     le = LabelEncoder()
     data['GENDER'] = le.fit_transform(data['GENDER'])
     data['LUNG_CANCER'] = le.fit_transform(data['LUNG_CANCER'])
 
-    # Normalization
+    # Normalize features
     scaler = MinMaxScaler()
     features = data.drop('LUNG_CANCER', axis=1)
     labels = data['LUNG_CANCER']
@@ -83,7 +85,11 @@ def classify(input_data):
 
     # Normalize the user input
     input_df = pd.DataFrame([input_data], columns=features.columns)
-    input_df['GENDER'] = le.transform(input_df['GENDER'])
+
+    # Re-fit LabelEncoder with all possible values
+    all_genders = ['M', 'F']  # Add all possible values 
+    le.fit(all_genders)
+    input_df['GENDER'] = le.transform(input_df['GENDER'])  # Encode user input
     scaled_input = scaler.transform(input_df)
 
     # Predict based on user input
@@ -114,7 +120,6 @@ def classify(input_data):
 
     return classification, plot_url, prediction[0]
 
-
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -125,20 +130,20 @@ def classify_page():
         # Collect form data
         form_data = {
             'GENDER': request.form['GENDER'],
-            'AGE': int(request.form['AGE']),
-            'SMOKING': request.form['SMOKING'],
-            'YELLOW_FINGERS': request.form['YELLOW_FINGERS'],
-            'ANXIETY': request.form['ANXIETY'],
-            'PEER_PRESSURE': request.form['PEER_PRESSURE'],
-            'CHRONIC_DISEASE': request.form['CHRONIC_DISEASE'],
-            'FATIGUE': request.form['FATIGUE'],
-            'ALLERGY': request.form['ALLERGY'],
-            'WHEEZING': request.form['WHEEZING'],
-            'ALCOHOL_CONSUMING': request.form['ALCOHOL_CONSUMING'],
-            'COUGHING': request.form['COUGHING'],
-            'SHORTNESS_OF_BREATH': request.form['SHORTNESS_OF_BREATH'],
-            'SWALLOWING_DIFFICULTY': request.form['SWALLOWING_DIFFICULTY'],
-            'CHEST_PAIN': request.form['CHEST_PAIN']
+            'AGE': float(request.form['AGE']),
+            'SMOKING': int(request.form['SMOKING']),
+            'YELLOW_FINGERS': int(request.form['YELLOW_FINGERS']),
+            'ANXIETY': int(request.form['ANXIETY']),
+            'PEER_PRESSURE': int(request.form['PEER_PRESSURE']),
+            'CHRONIC_DISEASE': int(request.form['CHRONIC_DISEASE']),
+            'FATIGUE': int(request.form['FATIGUE']),
+            'ALLERGY': int(request.form['ALLERGY']),
+            'WHEEZING': int(request.form['WHEEZING']),
+            'ALCOHOL_CONSUMING': int(request.form['ALCOHOL_CONSUMING']),
+            'COUGHING': int(request.form['COUGHING']),
+            'SHORTNESS_OF_BREATH': int(request.form['SHORTNESS_OF_BREATH']),
+            'SWALLOWING_DIFFICULTY': int(request.form['SWALLOWING_DIFFICULTY']),
+            'CHEST_PAIN': int(request.form['CHEST_PAIN'])
         }
 
         # Classify user input
