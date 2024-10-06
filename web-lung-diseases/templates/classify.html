@@ -1,169 +1,175 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-    <h1 class="display-4 text-center">Lung Cancer Prediction using Random Forest</h1>
-    <p class="lead text-center">Please fill out the questionnaire below before proceeding with the classification.</p>
-
-    <!-- Form Questionnaire -->
-    <form method="POST" action="{{ url_for('classify_page') }}">
-        <!-- Gender -->
-        <div class="form-group">
-            <label for="gender">Gender</label>
-            <select class="form-control" id="gender" name="GENDER" required>
-                <option value="">Select Gender</option>
-                <option value="M">Male</option>
-                <option value="F">Female</option>
-            </select>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12 text-left"> 
+            <h2 class="display-4">Lung Cancer Prediction using Random Forest</h2>
+            <p class="lead">Please fill out the questionnaire below to get a classification.</p>
         </div>
+    </div>
 
-        <!-- Age -->
-        <div class="form-group">
-            <label for="age">Age (years)</label>
-            <input type="number" class="form-control" id="age" name="AGE" min="1" required>
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <form method="POST" action="{{ url_for('classify_page') }}">
+                <!-- Form Elements -->
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="gender">Gender</label>
+                        <select class="form-control" id="gender" name="GENDER" required>
+                            <option value="">Select Gender</option>
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="age">Age (years)</label>
+                        <input type="number" class="form-control" id="age" name="AGE" min="1" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="smoking">Do you smoke?</label>
+                        <select class="form-control" id="smoking" name="SMOKING" required>
+                            <option value="">Select an option</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="yellow_fingers">Do you have yellow fingers?</label>
+                        <select class="form-control" id="yellow_fingers" name="YELLOW_FINGERS" required>
+                            <option value="">Select an option</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="anxiety">Do you experience anxiety?</label>
+                        <select class="form-control" id="anxiety" name="ANXIETY" required>
+                            <option value="">Select an option</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="peer_pressure">Have you experienced peer pressure to smoke?</label>
+                        <select class="form-control" id="peer_pressure" name="PEER_PRESSURE" required>
+                            <option value="">Select an option</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="chronic_disease">Do you have any chronic diseases (e.g., asthma, COPD)?</label>
+                        <select class="form-control" id="chronic_disease" name="CHRONIC_DISEASE" required>
+                            <option value="">Select an option</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="fatigue">Do you often experience fatigue?</label>
+                        <select class="form-control" id="fatigue" name="FATIGUE" required>
+                            <option value="">Select an option</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="allergy">Do you have allergies?</label>
+                        <select class="form-control" id="allergy" name="ALLERGY" required>
+                            <option value="">Select an option</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="wheezing">Do you experience wheezing?</label>
+                        <select class="form-control" id="wheezing" name="WHEEZING" required>
+                            <option value="">Select an option</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="alcohol_consuming">Do you consume alcohol?</label>
+                        <select class="form-control" id="alcohol_consuming" name="ALCOHOL_CONSUMING" required>
+                            <option value="">Select an option</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="coughing">Do you experience frequent coughing?</label>
+                        <select class="form-control" id="coughing" name="COUGHING" required>
+                            <option value="">Select an option</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="shortness_of_breath">Do you experience shortness of breath?</label>
+                        <select class="form-control" id="shortness_of_breath" name="SHORTNESS_OF_BREATH" required>
+                            <option value="">Select an option</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="swallowing_difficulty">Do you have difficulty swallowing?</label>
+                        <select class="form-control" id="swallowing_difficulty" name="SWALLOWING_DIFFICULTY" required>
+                            <option value="">Select an option</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="chest_pain">Do you experience chest pain?</label>
+                        <select class="form-control" id="chest_pain" name="CHEST_PAIN" required>
+                            <option value="">Select an option</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg">Submit Questionnaire and Classify</button>
+                </div>
+            </form>
         </div>
-
-        <!-- Smoking -->
-        <div class="form-group">
-            <label for="smoking">Do you smoke?</label>
-            <select class="form-control" id="smoking" name="SMOKING" required>
-                <option value="">Select an option</option>
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-        </div>
-
-        <!-- Yellow Fingers -->
-        <div class="form-group">
-            <label for="yellow_fingers">Do you have yellow fingers?</label>
-            <select class="form-control" id="yellow_fingers" name="YELLOW_FINGERS" required>
-                <option value="">Select an option</option>
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-        </div>
-
-        <!-- Anxiety -->
-        <div class="form-group">
-            <label for="anxiety">Do you experience anxiety?</label>
-            <select class="form-control" id="anxiety" name="ANXIETY" required>
-                <option value="">Select an option</option>
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-        </div>
-
-        <!-- Peer Pressure -->
-        <div class="form-group">
-            <label for="peer_pressure">Have you experienced peer pressure to smoke?</label>
-            <select class="form-control" id="peer_pressure" name="PEER_PRESSURE" required>
-                <option value="">Select an option</option>
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-        </div>
-
-        <!-- Chronic Disease -->
-        <div class="form-group">
-            <label for="chronic_disease">Do you have any chronic diseases (e.g., asthma, COPD)?</label>
-            <select class="form-control" id="chronic_disease" name="CHRONIC_DISEASE" required>
-                <option value="">Select an option</option>
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-        </div>
-
-        <!-- Fatigue -->
-        <div class="form-group">
-            <label for="fatigue">Do you often experience fatigue?</label>
-            <select class="form-control" id="fatigue" name="FATIGUE" required>
-                <option value="">Select an option</option>
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-        </div>
-
-        <!-- Allergy -->
-        <div class="form-group">
-            <label for="allergy">Do you have allergies?</label>
-            <select class="form-control" id="allergy" name="ALLERGY" required>
-                <option value="">Select an option</option>
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-        </div>
-
-        <!-- Wheezing -->
-        <div class="form-group">
-            <label for="wheezing">Do you experience wheezing?</label>
-            <select class="form-control" id="wheezing" name="WHEEZING" required>
-                <option value="">Select an option</option>
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-        </div>
-
-        <!-- Alcohol Consuming -->
-        <div class="form-group">
-            <label for="alcohol_consuming">Do you consume alcohol?</label>
-            <select class="form-control" id="alcohol_consuming" name="ALCOHOL_CONSUMING" required>
-                <option value="">Select an option</option>
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-        </div>
-
-        <!-- Coughing -->
-        <div class="form-group">
-            <label for="coughing">Do you experience frequent coughing?</label>
-            <select class="form-control" id="coughing" name="COUGHING" required>
-                <option value="">Select an option</option>
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-        </div>
-
-        <!-- Shortness of Breath -->
-        <div class="form-group">
-            <label for="shortness_of_breath">Do you experience shortness of breath?</label>
-            <select class="form-control" id="shortness_of_breath" name="SHORTNESS_OF_BREATH" required>
-                <option value="">Select an option</option>
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-        </div>
-
-        <!-- Swallowing Difficulty -->
-        <div class="form-group">
-            <label for="swallowing_difficulty">Do you have difficulty swallowing?</label>
-            <select class="form-control" id="swallowing_difficulty" name="SWALLOWING_DIFFICULTY" required>
-                <option value="">Select an option</option>
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-        </div>
-
-        <!-- Chest Pain -->
-        <div class="form-group">
-            <label for="chest_pain">Do you experience chest pain?</label>
-            <select class="form-control" id="chest_pain" name="CHEST_PAIN" required>
-                <option value="">Select an option</option>
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
-        </div>
-
-        <button type="submit" class="btn btn-primary btn-lg btn-block mt-4">Submit Questionnaire and Classify</button>
-    </form>
+    </div>
 
     {% if classification %}
-    <div class="mt-5">
-        <h2>Classification Result:</h2>
-        <p>{{ result }}</p>
-        <h2>Classification Report:</h2>
-        <pre>{{ classification }}</pre>
-        <h2>Confusion Matrix:</h2>
-        <img src="data:image/png;base64,{{ plot_url }}" alt="Confusion Matrix">
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <h2>Classification Result:</h2>
+            <p>{{ result }}</p>
+            <h2>Classification Report:</h2>
+            <pre>{{ classification }}</pre>
+            <h2>Confusion Matrix:</h2>
+            <img src="data:image/png;base64,{{ plot_url }}" alt="Confusion Matrix">
+        </div>
     </div>
     {% endif %}
 </div>
