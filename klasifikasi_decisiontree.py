@@ -9,8 +9,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from tabulate import tabulate
 
-# fileLocation = '../mlprak_uts/dataset_sudahnormalisasi.csv'
-df =pd.read_csv('dataset_sudahnormalisasi.csv')
+fileLocation = '../mlprak_uts/dataset_sudahnormalisasi.csv'
+df =pd.read_csv(fileLocation)
 df.columns = ['GENDER','AGE', 'SMOKING', 'YELLOW_FINGERS', 'ANXIETY', 'PEER_PRESSURE', 
               'CHRONIC_DISEASE', 'FATIGUE', 'ALLERGY', 'WHEEZING', 
               'ALCOHOL_CONSUMING', 'COUGHING', 'SHORTNESS_OF_BREATH', 
@@ -38,7 +38,7 @@ X = df[['GENDER','AGE', 'SMOKING', 'YELLOW_FINGERS', 'ANXIETY', 'PEER_PRESSURE',
 y = df['LUNG_CANCER'] 
 
 # Split df training dan df testing
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
 
 # Membuat decision tree
 clf = DecisionTreeClassifier(criterion='entropy')
