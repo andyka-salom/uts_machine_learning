@@ -2,8 +2,8 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 
-fileLocation = '../mlprak_uts/dataset.csv'
-df = pd.read_csv(fileLocation)
+fileLocation = 'lungCancer.csv'
+df = pd.read_csv(fileLocation, delimiter=';')
 
 print("\n Data yang telah dibaca:")
 print(df)
@@ -269,6 +269,6 @@ print(df_cleaned)
 print("============================================================")
 
 # menyimpan data yang sudah dinormalisasi ke file CSV baru
-output_file_normalized = '../mlprak_uts/dataset_sudahnormalisasi.csv'
+output_file_normalized = '../mlprak_uts/datasetbaru_sudahnormalisasi.csv'
 df_cleaned.to_csv(output_file_normalized, index=False)
 print(f"\nData yang telah dinormalisasi disimpan ke {output_file_normalized}")

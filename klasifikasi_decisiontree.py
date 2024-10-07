@@ -2,19 +2,20 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, precision_score
 from sklearn.preprocessing import LabelEncoder
 from sklearn import tree
 import seaborn as sns
 import matplotlib.pyplot as plt
 from tabulate import tabulate
 
-fileLocation = '../mlprak_uts/dataset_sudahnormalisasi.csv'
-df =pd.read_csv(fileLocation)
-df.columns = ['GENDER','AGE', 'SMOKING', 'YELLOW_FINGERS', 'ANXIETY', 'PEER_PRESSURE', 
+fileLocation = '../mlprak_uts/datasetbaru_sudahnormalisasi.csv'
+df = pd.read_csv(fileLocation)
+
+df.columns = ['GENDER', 'AGE', 'SMOKING', 'YELLOW_FINGERS', 'ANXIETY', 'PEER_PRESSURE', 
               'CHRONIC_DISEASE', 'FATIGUE', 'ALLERGY', 'WHEEZING', 
               'ALCOHOL_CONSUMING', 'COUGHING', 'SHORTNESS_OF_BREATH', 
-              'SWALLOWING_DIFFICULTY', 'CHEST_PAIN','LUNG_CANCER']
+              'SWALLOWING_DIFFICULTY', 'CHEST_PAIN', 'LUNG_CANCER']
 
 print("\n df yang telah dibaca:")
 print(df)
@@ -31,7 +32,7 @@ df['GENDER'] = le.fit_transform(df['GENDER'])
 df['LUNG_CANCER'] = le.fit_transform(df['LUNG_CANCER'])
 
 # grouping df antara df training dan df target
-X = df[['GENDER','AGE', 'SMOKING', 'YELLOW_FINGERS', 'ANXIETY', 'PEER_PRESSURE', 
+X = df[['GENDER', 'AGE', 'SMOKING', 'YELLOW_FINGERS', 'ANXIETY', 'PEER_PRESSURE', 
         'CHRONIC_DISEASE', 'FATIGUE', 'ALLERGY', 'WHEEZING', 
         'ALCOHOL_CONSUMING', 'COUGHING', 'SHORTNESS_OF_BREATH', 
         'SWALLOWING_DIFFICULTY', 'CHEST_PAIN']] 
@@ -59,7 +60,7 @@ plt.xlabel("Predicted")
 plt.ylabel("Actual")
 plt.show()
 
-# cm
+# Confusion matrix dalam DataFrame
 conf_matrix_df = pd.DataFrame(conf_matrix, index=['True Class 0', 'True Class 1'], columns=['Pred Class 0', 'Pred Class 1'])
 print("\nConfusion Matrix:")
 print(conf_matrix_df)
@@ -85,6 +86,23 @@ summary_table = pd.DataFrame({
 print("\nSummary Table:")
 print(tabulate(summary_table, headers='keys', tablefmt='grid', showindex=False))
 print("============================================================")
+
+# Akurasi, Precision, Sensitivity, Specificity
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred, zero_division=1)
+TN = conf_matrix[1][1]
+FN = conf_matrix[1][0]
+TP = conf_matrix[0][0]
+FP = conf_matrix[0][1]
+sens = TN / (TN + FP) * 100 if (TN + FP) != 0 else 0
+spec = TP / (TP + FN) * 100 if (TP + FN) != 0 else 0
+
+print(f'\nAkurasi: {accuracy * 100:.2f}%')
+print(f'Sensitivity: {sens:.2f}%')
+print(f'Specificity: {spec:.2f}%')
+print(f'Precision: {precision * 100:.2f}%')
+f1_average = (f1_class_0 + f1_class_1) / 2
+print(f'Rata-rata F1 Score: {f1_average:.2%}')
 
 # Plot Decision Tree
 plt.figure(figsize=(20, 15))
