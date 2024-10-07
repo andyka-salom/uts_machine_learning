@@ -149,7 +149,7 @@ def classify_page():
         # Classify user input
         classification_report, plot_url, prediction = classify(form_data)
         
-        result = "Lung Cancer Detected" if prediction == 1 else "No Lung Cancer Detected"
+        result = "Berdasarkan hasil analisis data yang diberikan, model mendeteksi adanya indikasi kanker paru-paru." if prediction == 1 else "Berdasarkan hasil analisis data yang diberikan, model tidak mendeteksi adanya indikasi kanker paru-paru."
         
         return render_template('classify.html', classification=classification_report, plot_url=plot_url, result=result)
     return render_template('classify.html', classification=None)

@@ -1,7 +1,9 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+
+{% block content %}
 <div class="container mt-5">
     <div class="row">
-        <div class="col-md-12 text-left">
+        <div class="col-md-12 text-left"> 
             <h2 class="display-4">Lung Cancer Prediction using Random Forest</h2>
             <p class="lead">Please fill out the questionnaire below to get a classification.</p>
         </div>
@@ -188,13 +190,24 @@
     <div class="row mt-5">
         <div class="col-md-12">
             <h2>Classification Result:</h2>
-            <p>{{ result }}</p>
+            <div style="border: 2px solid #137aa8; padding: 20px; border-radius: 10px;">
+                <p style="font-weight: bold; font-size: 24px; color: #137aa8;">{{ result }}</p>
+            </div>
+            
+            {% if "Berdasarkan hasil analisis data yang diberikan, model tidak mendeteksi adanya indikasi kanker paru-paru." in result %}
+                <img src="{{ url_for('static', filename='images/sehat.png') }}" alt="No Lung Cancer Detected" class="img-fluid">
+            {% else %}
+                <img src="{{ url_for('static', filename='images/cancer.png') }}" alt="Lung Cancer Detected" class="img-fluid">
+            {% endif %}
+            
             <h2>Classification Report:</h2>
             <pre>{{ classification }}</pre>
+            
             <h2>Confusion Matrix:</h2>
-            <img src="data:image/png;base64,{{ plot_url }}" alt="Confusion Matrix" />
+            <img src="data:image/png;base64,{{ plot_url }}" alt="Confusion Matrix">
         </div>
     </div>
-    {% endif %}
+{% endif %}
+
 </div>
 {% endblock %}
