@@ -3,6 +3,7 @@ import pandas as pd
 import seaborn as sns
 from sklearn.preprocessing import MinMaxScaler, LabelEncoder
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, precision_score
+from sklearn.metrics import confusion_matrix, classification_report, accuracy_score, precision_score, f1_score, ConfusionMatrixDisplay
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import ConfusionMatrixDisplay
@@ -70,6 +71,7 @@ print(classification_report(y_test, Y_pred, zero_division=1))
 # Akurasi, Precision, Sensitivity, Specificity
 accuracy = accuracy_score(y_test, Y_pred)
 precision = precision_score(y_test, Y_pred, zero_division=1)
+f1 = f1_score(y_test, Y_pred, zero_division=1)
 TN = cm[1][1]
 FN = cm[1][0]
 TP = cm[0][0]
@@ -81,6 +83,7 @@ print(f'Akurasi: {accuracy * 100:.2f}%')
 print(f'Sensitivity: {sens:.2f}%')
 print(f'Specificity: {spec:.2f}%')
 print(f'Precision: {precision * 100:.2f}%')
+print(f'F1-Score: {f1 * 100:.2f}%')
 
 # Menampilkan Confusion Matrix
 ConfusionMatrixDisplay(confusion_matrix=cm).plot()
